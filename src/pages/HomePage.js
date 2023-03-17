@@ -1,7 +1,8 @@
 import React from 'react'
+import Home from '../components/home/Home'
 
 export default function HomePage() {
   return (
-    <h1>Am HomePage</h1>
+    <Home />
   )
 }

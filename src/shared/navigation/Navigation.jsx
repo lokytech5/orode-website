@@ -14,6 +14,7 @@ import {
 import { NavLink } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './Navigation.css'
+import ColorModeSwitch from '../../theme/ColorModeSwitch';
 
 export default function Navigation() {
     return (
@@ -35,6 +36,7 @@ export default function Navigation() {
                         Photography
                     </Text>
                 </Link>
+                <ColorModeSwitch />
             </Flex>
             <Spacer />
             <Box display={{ base: 'none', md: 'block' }}>
