@@ -6,14 +6,27 @@ import {
     Text,
     Button,
     Image,
-    Grid,
+    Card,
     GridItem,
     useBreakpointValue,
+    HStack,
+    Grid,
 } from '@chakra-ui/react';
 
+import HomeList from './HomeList';
 export default function Home() {
     const flexDirection = useBreakpointValue({ base: 'column', md: 'row' });
-    const imageSize = useBreakpointValue({ base: '100%', md: '300px', lg: '50%' });
+    const imageSize = useBreakpointValue({ base: '100%', md: '300px', lg: '30%' });
+
+
+    const imageWidth = useBreakpointValue({
+        base: '100%',
+        lg: '100%',
+    });
+
+
+
+
     return (
         <div>
             <Flex
@@ -42,9 +55,15 @@ export default function Home() {
                     src={require('../../assets/img/screen.webp')}
                     alt="Placeholder for image"
                     boxSize={imageSize}
+                    width={imageWidth}
                     objectFit="cover"
                 />
             </Flex>
+            <HomeList />
+
+
+
+
         </div>
     )
 }
