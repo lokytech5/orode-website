@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Box,
     Flex,
     Link,
     Spacer,
     Text,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
     IconButton,
+    Drawer,
+    DrawerBody,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    VStack,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -17,6 +20,15 @@ import './Navigation.css'
 import ColorModeSwitch from '../../theme/ColorModeSwitch';
 
 export default function Navigation() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const onClose = () => {
+        setIsOpen(false);
+    };
+
+    const handleToggle = () => {
+        setIsOpen(!isOpen);
+    };
     return (
         <Flex
             as="nav"
@@ -59,33 +71,42 @@ export default function Navigation() {
                 </Flex>
             </Box>
             <Box display={{ base: 'block', md: 'none' }}>
-                <Menu>
-                    <MenuButton
-                        as={IconButton}
-                        aria-label="Options"
-                        icon={<GiHamburgerMenu />}
-                        variant="outline"
-                        backgroundColor="transparent"
-                        _hover={{ bg: 'teal.600' }}
-                    />
-                    <MenuList>
-                        <MenuItem as={NavLink} to="/">
-                            Home
-                        </MenuItem>
-                        <MenuItem as={NavLink} to="/catalog">
-                            Catalog
-                        </MenuItem>
-                        <MenuItem as={NavLink} to="/services">
-                            Services
-                        </MenuItem>
-                        <MenuItem as={NavLink} to="/login">
-                            Login
-                        </MenuItem>
-                        <MenuItem as={NavLink} to="/about-us">
-                            About Us
-                        </MenuItem>
-                    </MenuList>
-                </Menu>
+
+                <IconButton
+                    aria-label="Options"
+                    icon={<GiHamburgerMenu />}
+                    variant="outline"
+                    backgroundColor="transparent"
+                    _hover={{ bg: 'teal.600' }}
+                    onClick={handleToggle}
+                />
+                <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+                    <DrawerOverlay>
+                        <DrawerContent>
+                            <DrawerCloseButton />
+                            <DrawerHeader>Menu</DrawerHeader>
+                            <DrawerBody>
+                                <VStack spacing={4} align="stretch">
+                                    <Link as={NavLink} to="/" onClick={onClose}>
+                                        Home
+                                    </Link>
+                                    <Link as={NavLink} to="/catalog" onClick={onClose}>
+                                        Gallrey
+                                    </Link>
+                                    <Link as={NavLink} to="/services" onClick={onClose}>
+                                        Services
+                                    </Link>
+                                    <Link as={NavLink} to="/login" onClick={onClose}>
+                                        Login
+                                    </Link>
+                                    <Link as={NavLink} to="/about-us" onClick={onClose}>
+                                        About Us
+                                    </Link>
+                                </VStack>
+                            </DrawerBody>
+                        </DrawerContent>
+                    </DrawerOverlay>
+                </Drawer>
             </Box>
         </Flex>
     )
