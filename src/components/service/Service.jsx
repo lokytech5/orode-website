@@ -32,7 +32,8 @@ const formValidationSchema = z.object({
 export default function Service(props) {
     const { register,
         handleSubmit,
-        formState: { errors, isValid } } = useForm({
+        formState: { errors, isValid },
+        reset } = useForm({
             resolver: zodResolver(formValidationSchema)
         });
 
@@ -49,6 +50,7 @@ export default function Service(props) {
             message: data.message,
         }
         props.onAddService(serviceData);
+        reset();
     };
 
     return (
@@ -67,7 +69,7 @@ export default function Service(props) {
                 pr={6}
                 borderRadius="md"
                 boxShadow="xl"
-                bgGradient="linear(to-r, teal.500, cyan.500)"
+            // bgGradient="linear(to-r, teal.500, cyan.500)"
             >
 
                 <Text fontSize="2xl" fontWeight="bold" textAlign="center" mb={6}>

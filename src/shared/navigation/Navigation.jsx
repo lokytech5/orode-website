@@ -65,6 +65,9 @@ export default function Navigation() {
                     <Link as={NavLink} to="/login" px={2}>
                         Login
                     </Link>
+                    <Link as={NavLink} to="/register" px={2}>
+                        Register
+                    </Link>
                     <Link as={NavLink} to="/about-us" px={2}>
                         About Us
                     </Link>

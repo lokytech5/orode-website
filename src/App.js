@@ -6,6 +6,8 @@ import CatalogPage from './pages/CatalogPage'
 import AboutUsPage from "./pages/AboutUsPage";
 import ServicePage from "./pages/ServicePage";
 import LoginUserPage from "./pages/LoginUserPage";
+import DashBoardPage from "./pages/DashBoardPage";
+import RegisterUserPage from "./pages/RegisterUserPage";
 import { Box } from "@chakra-ui/react";
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route path='/about-us' Component={AboutUsPage} />
             <Route path='/services' Component={ServicePage} />
             <Route path='/login' Component={LoginUserPage} />
+            <Route path='/dasboard' Component={DashBoardPage} />
+            <Route path='/register' Component={RegisterUserPage} />
           </Routes>
         </Box>
       </Router>
