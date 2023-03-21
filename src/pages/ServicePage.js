@@ -14,6 +14,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Service from '../components/service/Service'
 
+
 export default function ServicePage() {
   const toast = useToast();
   const navigate = useNavigate();

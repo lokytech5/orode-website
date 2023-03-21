@@ -14,9 +14,11 @@ import {
     Button,
     Flex,
     Text,
+    Link,
 } from '@chakra-ui/react';
+import { useSelector} from 'react-redux'
 
-//*Handling validation for each input field
+//*Handling validation errors for each input type
 
 const formValidationSchema = z.object({
     name: z.string().nonempty('Name is required'),
@@ -36,6 +38,10 @@ export default function Service(props) {
         reset } = useForm({
             resolver: zodResolver(formValidationSchema)
         });
+
+    //*Initializing redux component
+    const isAuthenticated = useSelector((state) => state.isAuthenticated);
+    
 
     const handleFormSubmit = (data) => {
         // Handle form submission
@@ -75,7 +81,7 @@ export default function Service(props) {
                 <Text fontSize="2xl" fontWeight="bold" textAlign="center" mb={6}>
                     Book us for your Event
                 </Text>
-                <form onSubmit={handleSubmit(handleFormSubmit)}>
+                {isAuthenticated ? (<form onSubmit={handleSubmit(handleFormSubmit)}>
                     <VStack spacing={6} align="stretch">
                         <FormControl id="name" isInvalid={errors.name}>
                             <FormLabel fontSize="lg">Name</FormLabel>
@@ -178,7 +184,22 @@ export default function Service(props) {
                         Submit
                     </Button>
 
-                </form>
+                </form>) : (
+                        <Box mt={6} textAlign="center">
+                            <Text fontSize="lg">
+                                Please{' '}
+                                <Link color="teal.500" href="/login">
+                                    log in
+                                </Link>{' '}
+                                or{' '}
+                                <Link color="teal.500" href="/register">
+                                    register
+                                </Link>{' '}
+                                to book a service.
+                            </Text>
+                        </Box>
+                )}
+
             </Box>
         </Flex>
 
