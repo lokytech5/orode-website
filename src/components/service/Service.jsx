@@ -40,7 +40,7 @@ export default function Service(props) {
         });
 
     //*Initializing redux component
-    const isAuthenticated = useSelector((state) => state.isAuthenticated);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     
 
     const handleFormSubmit = (data) => {

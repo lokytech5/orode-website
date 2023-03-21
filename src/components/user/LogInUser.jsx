@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useDispatch } from 'react-redux'
+import ServicePage from '../../pages/ServicePage'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAuthenticated } from '../../redux/reduxActions/authActions'
 import {
     Button,
@@ -32,17 +34,22 @@ export default function LoginInUser(props) {
 
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+    //*Initializing authenticated User
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
     const handleFormSubmit = (data) => {
         //Handle the form submission
         const loginData = {
             username: data.username,
             password: data.password,
-        }
-
+        };
         props.onAddLogin(loginData);
+        dispatch(setAuthenticated(true));
+        navigate('/services');
         reset();
 
-    }
+    };
 
     return (
         <Center h="100vh" w="100vw" top="-10">
@@ -56,40 +63,44 @@ export default function LoginInUser(props) {
                     w="100%"
                 >
 
-                    {dispatch(setAuthenticated(true)) && (
-                        <form onSubmit={handleSubmit(handleFormSubmit)}>
 
-                            <FormControl id="username">
-                                <FormLabel>Name</FormLabel>
-                                <Input
-                                    {...register('username')}
-                                    type="text"
-                                    placeholder="Enter your Username" />
-                                <FormErrorMessage>
-                                    {errors.username?.message}
-                                </FormErrorMessage>
-                            </FormControl>
-                            <FormControl id="password">
-                                <FormLabel>Password</FormLabel>
-                                <Input
-                                    {...register('password')}
-                                    type="password"
-                                    placeholder="Enter your password" />
-                                <FormErrorMessage>
-                                    {errors.password?.message}
-                                </FormErrorMessage>
-                            </FormControl>
-                            <Button colorScheme="blue" width="100%" type="submit">
-                                Submit
+                    <form onSubmit={handleSubmit(handleFormSubmit)}>
+
+                        <FormControl id="username">
+                            <FormLabel>Name</FormLabel>
+                            <Input
+                                {...register('username')}
+                                type="text"
+                                placeholder="Enter your Username" />
+                            <FormErrorMessage>
+                                {errors.username?.message}
+                            </FormErrorMessage>
+                        </FormControl>
+                        <FormControl id="password">
+                            <FormLabel>Password</FormLabel>
+                            <Input
+                                {...register('password')}
+                                type="password"
+                                placeholder="Enter your password" />
+                            <FormErrorMessage>
+                                {errors.password?.message}
+                            </FormErrorMessage>
+                        </FormControl>
+                        <Button colorScheme="blue" width="100%" type="submit">
+                            Submit
+                        </Button>
+                        <Text fontSize="sm" mt={2}>
+                            Need an account?{" "}
+                            <Button variant="link" colorScheme="blue" fontSize="sm">
+                                Sign up
                             </Button>
-                            <Text fontSize="sm" mt={2}>
-                                Need an account?{" "}
-                                <Button variant="link" colorScheme="blue" fontSize="sm">
-                                    Sign up
-                                </Button>
-                            </Text>
-                        </form>
-                    )}
+                        </Text>
+                    </form>
+
+
+
+
+
 
                 </VStack>
             </Container>
