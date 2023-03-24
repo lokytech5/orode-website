@@ -1,9 +1,8 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import ServicePage from '../../pages/ServicePage'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuthenticated } from '../../redux/reduxActions/authActions'
 import {
@@ -44,10 +43,17 @@ export default function LoginInUser(props) {
             username: data.username,
             password: data.password,
         };
-        props.onAddLogin(loginData);
-        dispatch(setAuthenticated(true));
-        navigate('/services');
-        reset();
+        props.onAddLogin(loginData)
+            .then((success) => {
+                if (success) {
+                    dispatch(setAuthenticated(true));
+                    navigate('/services');
+                }
+            })
+            .catch((error) => {
+                console.error('Error while logging in:', error);
+            });
+
 
     };
 
@@ -66,7 +72,7 @@ export default function LoginInUser(props) {
 
                     <form onSubmit={handleSubmit(handleFormSubmit)}>
 
-                        <FormControl id="username">
+                        <FormControl id="username" isInvalid={errors.username}>
                             <FormLabel>Name</FormLabel>
                             <Input
                                 {...register('username')}
@@ -76,7 +82,7 @@ export default function LoginInUser(props) {
                                 {errors.username?.message}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl id="password">
+                        <FormControl id="password" isInvalid={errors.password}>
                             <FormLabel>Password</FormLabel>
                             <Input
                                 {...register('password')}
@@ -92,7 +98,7 @@ export default function LoginInUser(props) {
                         <Text fontSize="sm" mt={2}>
                             Need an account?{" "}
                             <Button variant="link" colorScheme="blue" fontSize="sm">
-                                Sign up
+                                <Link to='/register'>  Sign up </Link>
                             </Button>
                         </Text>
                     </form>

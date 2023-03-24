@@ -16,7 +16,7 @@ import {
     Text,
     Link,
 } from '@chakra-ui/react';
-import { useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 //*Handling validation errors for each input type
 
@@ -41,7 +41,7 @@ export default function Service(props) {
 
     //*Initializing redux component
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    
+
 
     const handleFormSubmit = (data) => {
         // Handle form submission
@@ -58,6 +58,8 @@ export default function Service(props) {
         props.onAddService(serviceData);
         reset();
     };
+
+
 
     return (
         <Flex
@@ -185,19 +187,19 @@ export default function Service(props) {
                     </Button>
 
                 </form>) : (
-                        <Box mt={6} textAlign="center">
-                            <Text fontSize="lg">
-                                Please{' '}
-                                <Link color="teal.500" href="/login">
-                                    log in
-                                </Link>{' '}
-                                or{' '}
-                                <Link color="teal.500" href="/register">
-                                    register
-                                </Link>{' '}
-                                to book a service.
-                            </Text>
-                        </Box>
+                    <Box mt={6} textAlign="center">
+                        <Text fontSize="lg">
+                            Please{' '}
+                            <Link color="teal.500" href="/login">
+                                log in
+                            </Link>{' '}
+                            or{' '}
+                            <Link color="teal.500" href="/register">
+                                register
+                            </Link>{' '}
+                            to book a service.
+                        </Text>
+                    </Box>
                 )}
 
             </Box>

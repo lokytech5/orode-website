@@ -13,6 +13,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Service from '../components/service/Service'
+import axiosInstance from '../utility/axiosInstance';
 
 
 export default function ServicePage() {
@@ -29,7 +30,12 @@ export default function ServicePage() {
   //*Handling form submission events to backend services using postRequest
   const addServiceHandler = async (serviceData) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/services', serviceData);
+      const token = localStorage.getItem('token');
+      const response = await axiosInstance.post('/api/services', serviceData, {
+        headers: {
+          'x-auth-token': token,
+        }
+      });
       if (response.status === 200 || response.status === 201) {
         console.log('Booking Successfully:', response.data);
         setFormData(serviceData);
@@ -67,9 +73,18 @@ export default function ServicePage() {
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Your booking has been successfully confirmed</ModalHeader>
+            <ModalHeader>Booking Confirmed</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
+              <p>
+                Thank you, {formData.name}! Your service booking has been successfully
+                confirmed. We will send a confirmation email to {formData.email} with the
+                details of your booking.
+              </p>
+              <p>
+                If you have any questions or need to make changes to your booking, please
+                contact our customer support.
+              </p>
               {/* Display the submitted data here */}
               <ul>
                 {Object.entries(formData).map(([key, value]) => (

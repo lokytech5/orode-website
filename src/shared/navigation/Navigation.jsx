@@ -1,7 +1,17 @@
 import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import './Navigation.css'
+import ColorModeSwitch from '../../theme/ColorModeSwitch';
+
+//*Importing Redux-files 
+import { useDispatch, useSelector } from 'react-redux';
+import { setAuthenticated } from '../../redux/reduxActions/authActions';
+
 import {
     Box,
     Flex,
+    Button,
     Link,
     Spacer,
     Text,
@@ -14,18 +24,25 @@ import {
     DrawerCloseButton,
     VStack,
 } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import './Navigation.css'
-import ColorModeSwitch from '../../theme/ColorModeSwitch';
 
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
 
+    const dispatch = useDispatch();
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        dispatch(setAuthenticated(false));
+    }
+
+
+    //*Set Toggle-Close
     const onClose = () => {
         setIsOpen(false);
     };
 
+    //*Handling Toggle-Close
     const handleToggle = () => {
         setIsOpen(!isOpen);
     };
@@ -62,15 +79,25 @@ export default function Navigation() {
                     <Link as={NavLink} to="/services" px={2}>
                         Services
                     </Link>
-                    <Link as={NavLink} to="/login" px={2}>
-                        Login
-                    </Link>
-                    <Link as={NavLink} to="/register" px={2}>
-                        Register
-                    </Link>
                     <Link as={NavLink} to="/about-us" px={2}>
                         About Us
                     </Link>
+
+                    {isAuthenticated ? (
+                        <Button colorScheme="teal" variant="outline" onClick={handleLogout} ml={2}>
+                            Logout
+                        </Button>
+                    ) : (
+                        <>
+                            <Link as={NavLink} to="/login" px={2}>
+                                Login
+                            </Link>
+                            <Link as={NavLink} to="/register" px={2}>
+                                Register
+                            </Link>
+                        </>
+                    )}
+
                 </Flex>
             </Box>
             <Box display={{ base: 'block', md: 'none' }}>
@@ -99,12 +126,24 @@ export default function Navigation() {
                                     <Link as={NavLink} to="/services" onClick={onClose}>
                                         Services
                                     </Link>
-                                    <Link as={NavLink} to="/login" onClick={onClose}>
-                                        Login
-                                    </Link>
                                     <Link as={NavLink} to="/about-us" onClick={onClose}>
                                         About Us
                                     </Link>
+
+                                    {isAuthenticated ? (
+                                        <Button colorScheme="teal" variant="outline" onClick={handleLogout} width="100%">
+                                            Logout
+                                        </Button>
+                                    ) : (
+                                        <>
+                                            <Link as={NavLink} to="/login" onClick={onClose}>
+                                                Login
+                                            </Link>
+                                            <Link as={NavLink} to="/register" onClick={onClose}>
+                                                Register
+                                            </Link>
+                                        </>
+                                    )}
                                 </VStack>
                             </DrawerBody>
                         </DrawerContent>
