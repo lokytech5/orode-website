@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import RegisterUser from "../components/user/RegisterUser"
@@ -20,8 +20,6 @@ import {
 
 export default function RegisterUserPage() {
     const [registrationSuccess, setRegistrationSuccess] = useState(false);
-    // const [registrationError, setRegistrationError] = useState('');
-    // const [showAlert, setShowAlert] = useState(false);
 
     const toast = useToast();
     const navigate = useNavigate();

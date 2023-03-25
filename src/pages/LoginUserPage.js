@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useToast, Text } from '@chakra-ui/react';
 import LoginInUser from '../components/user/LogInUser'
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
 
 export default function LoginUserPage() {
     const toast = useToast();
@@ -13,7 +12,6 @@ export default function LoginUserPage() {
         try {
             const response = await axios.post('http://localhost:5000/api/auth', loginData);
             if (response.status === 200 || response.status === 201) {
-                // console.log('Booking Successfully:', response.data);
                 console.log("Token stored in local storage:", localStorage.getItem('token'));
                 // const decodedToken = jwt_decode(token);
                 // const username = decodedToken.username;
@@ -30,7 +28,7 @@ export default function LoginUserPage() {
                     duration: 5000,
                     isClosable: true,
                 });
-                return true;
+                return response.data;
             } else {
                 console.error('Error while sending form data to the backend:', response.status, response.statusText);
                 // Handle error, e.g., show an error message
@@ -41,7 +39,7 @@ export default function LoginUserPage() {
                     duration: 5000,
                     isClosable: true,
                 });
-                return false;
+                return null;
             }
 
         } catch (error) {
@@ -65,7 +63,7 @@ export default function LoginUserPage() {
                 });
             }
             console.log(loginData);
-            return false;
+            return null;
         }
     }
 

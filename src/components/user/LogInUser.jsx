@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAuthenticated } from '../../redux/reduxActions/authActions'
+import { setAuthenticated, setUserRole } from '../../redux/reduxActions/authActions'
 import {
     Button,
     Center,
@@ -44,9 +44,10 @@ export default function LoginInUser(props) {
             password: data.password,
         };
         props.onAddLogin(loginData)
-            .then((success) => {
-                if (success) {
+            .then((user) => {
+                if (user) {
                     dispatch(setAuthenticated(true));
+                    dispatch(setUserRole(user.isAdmin ? 'admin' : 'user'));
                     navigate('/services');
                 }
             })

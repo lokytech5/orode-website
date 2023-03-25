@@ -6,16 +6,16 @@ import { useToast } from '@chakra-ui/react';
 export default function DashBoardPage() {
 
   const [dashBoardItems, setDashBoardItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
 
   useEffect(() => {
     const fetchDashBoardDetails = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get('http://localhost:5000/api/services/');
-        console.log('API response:', response);
         if (response.status === 200 || response.status === 201) {
           setDashBoardItems(response.data.serviceRequest);
-          console.log('Fetched data:', response.data.serviceRequest); 
         }
       } catch (error) {
         console.error('Error fetching data from server', error);
@@ -28,6 +28,8 @@ export default function DashBoardPage() {
             isClosable: true,
           });
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -39,7 +41,8 @@ export default function DashBoardPage() {
 
   return (
     <DashBoard 
-      
+      dashBoardData= {dashBoardItems}
+      isLoading={isLoading}
     />
   )
 }

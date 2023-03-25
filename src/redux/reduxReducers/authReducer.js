@@ -1,5 +1,8 @@
 const initialState = {
     isAuthenticated: false,
+    user: {
+        role: null,
+    },
 }
 
 const authReducer = (state = initialState, action) => {
@@ -8,6 +11,12 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state, isAuthenticated: action.payload,
             };
+
+        case 'SET_USER_ROLE':
+            return {
+                ...state, user: { ...state.user, role: action.payload },
+            };
+
         default:
             return state;
     }
