@@ -123,6 +123,9 @@ export default function Navigation() {
                                     <Link as={NavLink} to="/catalog" onClick={onClose}>
                                         Gallrey
                                     </Link>
+                                    <Link as={NavLink} to="/dasboard" onClick={onClose}>
+                                        Dashboard
+                                    </Link>
                                     <Link as={NavLink} to="/services" onClick={onClose}>
                                         Services
                                     </Link>

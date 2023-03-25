@@ -90,7 +90,7 @@ export default function RegisterUser(props) {
                                 {errors.password?.message}
                             </FormErrorMessage>
                         </FormControl>
-                        <Button colorScheme="blue" width="100%" type="submit">
+                        <Button colorScheme="blue" width="100%" type="submit" cursor="pointer">
                             Submit
                         </Button>
                         <Text fontSize="sm" mt={2}>

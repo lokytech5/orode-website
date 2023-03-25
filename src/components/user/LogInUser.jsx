@@ -92,7 +92,7 @@ export default function LoginInUser(props) {
                                 {errors.password?.message}
                             </FormErrorMessage>
                         </FormControl>
-                        <Button colorScheme="blue" width="100%" type="submit">
+                        <Button colorScheme="blue" width="100%" type="submit" cursor="pointer">
                             Submit
                         </Button>
                         <Text fontSize="sm" mt={2}>
@@ -102,12 +102,6 @@ export default function LoginInUser(props) {
                             </Button>
                         </Text>
                     </form>
-
-
-
-
-
-
                 </VStack>
             </Container>
         </Center>
