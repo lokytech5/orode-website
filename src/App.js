@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setAuthenticated } from "./redux/reduxActions/authActions";
 
 import HomePage from './pages/HomePage'
-import CatalogPage from './pages/CatalogPage'
+import GalleryPage from "./pages/GalleryPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import ServicePage from "./pages/ServicePage";
 import LoginUserPage from "./pages/LoginUserPage";
@@ -24,7 +24,7 @@ function App() {
     }
   }, [dispatch]);
 
-  
+
   return (
     <>
       <Router>
@@ -32,7 +32,7 @@ function App() {
           <Navigation />
           <Routes>
             <Route path='/' Component={HomePage} />
-            <Route path='/catalog' Component={CatalogPage} />
+            <Route path='/gallery' Component={GalleryPage} />
             <Route path='/about-us' Component={AboutUsPage} />
             <Route path='/services' Component={ServicePage} />
             <Route path='/login' Component={LoginUserPage} />

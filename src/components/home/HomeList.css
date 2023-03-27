@@ -1,0 +1,7 @@
+.image-thumbnail {
+  transition: transform 0.3s;
+}
+
+.image-thumbnail:hover {
+  transform: scale(1.1);
+}

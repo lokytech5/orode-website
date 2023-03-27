@@ -73,8 +73,8 @@ export default function Navigation() {
                     <Link as={NavLink} to="/dasboard" px={2}>
                         Dashboard
                     </Link>
-                    <Link as={NavLink} to="/catalog" px={2}>
-                        Catalog
+                    <Link as={NavLink} to="/gallery" px={2}>
+                        Gallery
                     </Link>
                     <Link as={NavLink} to="/services" px={2}>
                         Services
@@ -120,8 +120,8 @@ export default function Navigation() {
                                     <Link as={NavLink} to="/" onClick={onClose}>
                                         Home
                                     </Link>
-                                    <Link as={NavLink} to="/catalog" onClick={onClose}>
-                                        Gallrey
+                                    <Link as={NavLink} to="/gallery" onClick={onClose}>
+                                        Gallery
                                     </Link>
                                     <Link as={NavLink} to="/dasboard" onClick={onClose}>
                                         Dashboard
