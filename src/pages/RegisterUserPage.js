@@ -6,7 +6,6 @@ import {
     useToast,
     Flex,
     VStack,
-    Box,
     Modal,
     ModalOverlay,
     ModalContent,

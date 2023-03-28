@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import Person from '../../utility/data'
+import React from 'react'
+import { Link } from 'react-router-dom';
 import HomeList from './HomeList';
 import Footer from '../../shared/footer/Footer';
 import { motion } from 'framer-motion';
-import { FaQuoteRight, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
+import { imageDetails, testimonials } from '../../utility/data';
 import './Home.css'
 import {
     Flex,
@@ -13,104 +12,34 @@ import {
     Text,
     Button,
     Image,
-    Card,
-    GridItem,
+    VStack,
+    SimpleGrid,
+    useTheme,
+    Avatar,
+    useColorModeValue,
     useBreakpointValue,
-    HStack,
-    Grid,
 } from '@chakra-ui/react';
 
-const imageDetails = [
-    {
-        src: require('../../assets/img/wedding.jpg'),
-        alt: 'Image 1',
-        text: 'wedding',
-        title: 'Wedding',
-    },
-    {
-        src: require('../../assets/img/traditional.jpg'),
-        alt: 'Image 2',
-        text: 'Traditional Wedding',
-        title: 'Traditional Wedding',
-    },
-    {
-        src: require('../../assets/img/naming.jpg'),
-        alt: 'Image 3',
-        text: 'wedding',
-        title: 'Naming Ceremony ',
-    },
-    {
-        src: require('../../assets/img/event.jpg'),
-        alt: 'Image 4',
-        text: 'wedding',
-        title: 'Event Photo',
-    },
-    {
-        src: require('../../assets/img/portrail.jpg'),
-        alt: 'Image 5',
-        text: 'wedding',
-        title: 'Portrails',
-    },
-    {
-        src: require('../../assets/img/brand.jpg'),
-        alt: 'Image 6',
-        text: 'wedding',
-        title: 'Brand Photo',
-    },
-];
+
 
 const MotionHeading = motion(Heading);
 const MotionText = motion(Text);
-const MotionBox = motion(Box);
 
 export default function Home() {
-    const [index, setIndex] = useState(0);
-    const { name, job, image, text } = Person[index]
+    const theme = useTheme();
 
     const flexDirection = useBreakpointValue({ base: 'column', md: 'row' });
     const imageSize = useBreakpointValue({ base: '100%', md: '300px', lg: '30%' });
 
-    const navigate = useNavigate();
+    const bg = useColorModeValue(theme.colors.background.light, theme.colors.background.dark);
+    const color = useColorModeValue(theme.colors.text.light.dark, theme.colors.text.dark.dark);
 
+    const primaryColor = theme.colors.primary[500];
+    const accentColor = theme.colors.accent[500];
 
+    const textGradient = `linear-gradient(to right, ${primaryColor}, ${accentColor})`;
+    const quoteIconSize = useBreakpointValue({ base: '2xl', md: '3xl' });
 
-    const imageWidth = useBreakpointValue({
-        base: '100%',
-        lg: '100%',
-    });
-
-    const checkNumber = (number) => {
-        if (number > Person.length - 1) {
-            return 0;
-        }
-
-        if (number < 0) {
-            return Person.length - 1;
-        }
-        return number;
-    }
-
-    const leftClickHandler = () => {
-        setIndex((index) => {
-            let newIndex = index - 1;
-            return checkNumber(newIndex);
-        });
-    };
-
-    const rightClickHandler = () => {
-        setIndex((index) => {
-            let newIndex = index + 1;
-            return checkNumber(newIndex);
-        });
-    };
-
-    const randomClickHandler = () => {
-        let randomNumber = Math.floor(Math.random() * Person.length);
-        if (randomNumber === index) {
-            randomNumber = index + 1;
-        }
-        setIndex(checkNumber(randomNumber))
-    };
 
 
 
@@ -133,7 +62,7 @@ export default function Home() {
                 bgRepeat="no-repeat"
                 height="100%"
                 width="100%"
-                zIndex="-1"
+                zIndex="1"
             >
 
                 <Flex
@@ -173,7 +102,9 @@ export default function Home() {
                             pt="16"
                             initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
                             animate={{ opacity: 1, scale: 1, rotate: 0, transition: { duration: 1.5, ease: "easeInOut" } }}
-                            color="white"
+                            color="transparent"
+                            background={textGradient}
+                            backgroundClip="text"
                         >
                             Welcome to MontionPic
                         </MotionHeading>
@@ -184,7 +115,7 @@ export default function Home() {
                             initial={{ opacity: 1, y: -50 }}
                             textAlign="center"
                             animate={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.5 } }}
-                            color="white"
+                            color={accentColor}
                         >
                             where creativity meets inspiration and discover the art of photography
                         </MotionText>
@@ -200,6 +131,9 @@ export default function Home() {
                                     fontWeight="extrabold"
                                     borderRadius="full"
                                     type='button'
+                                    bg={primaryColor}
+                                    color={color}
+                                    _hover={{ bg: accentColor }}
                                 >Explore</Button>
                             </Link>
 
@@ -222,41 +156,49 @@ export default function Home() {
 
             <HomeList images={imageDetails} />
 
-            <Box display="flex" justifyContent="center" alignItems="center" height="70vh">
+            <Box as="section" bg={bg} color={color} py={12} position="relative">
+                <Box
+                    position="absolute"
+                    top={0}
+                    bottom={0}
+                    left={0}
+                    right={0}
+                    opacity={0.05}
+                    bgImage="url('https://source.unsplash.com/random')"
+                    bgSize="cover"
+                    bgPosition="center"
+                    zIndex={-1}
+                />
+                <VStack align="center" spacing={4} mb={10}>
+                    <Text fontSize="3xl" fontWeight="bold" color={primaryColor}>
+                        Testimonials
+                    </Text>
+                    <Text fontSize="lg" textAlign="center" maxW="2xl">
+                        Here's what our clients have to say about our photography services.
+                    </Text>
+                </VStack>
+                <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} maxW="6xl" mx="auto" px={{ base: 4, md: 8 }}>
+                    {testimonials.map((testimonial, index) => (
+                        <Flex key={index} direction="column" alignItems="center" boxShadow="lg" borderRadius="lg" p={6}
+                            bg={(theme.colors.background.light, theme.colors.background.dark)}
+                            color={(theme.colors.text.light.dark, theme.colors.text.dark.dark)}
+                        >
 
-                <Card
-                    maxW={{ base: '95%', md: '80%', pt: '5%' }}
-                    p={5} m={5}
-                    paddingTop={{ base: 5, md: 5 }}
-                    borderRadius="0.25rem"
-                    transition="all 0.3s linear"
-                    textAlign="center">
-                    <article className='review'>
-                        <div className='img-container'>
-                            <img src={image} alt={name} className='person-img' />
-                            <span className='quote-icons'>
-                                <FaQuoteRight />
-                            </span>
-                        </div>
-                        <h4 className='author'>{name}</h4>
-                        <p className='job'>{job}</p>
-                        <p className='info'>{text}</p>
-                        <div className='button-container'>
-                            <button className='prev-btn' onClick={leftClickHandler}>
-                                <FaChevronLeft />
-                            </button>
-                            <button className='next-btn' onClick={rightClickHandler}>
-                                <FaChevronRight />
-                            </button>
-                        </div>
-                        <Button onClick={randomClickHandler}> Surpise me</Button>
-                    </article>
-                </Card>
+                            <Text fontSize="md" textAlign="center" fontStyle="italic" mb={6}>
+                                {testimonial.testimonial}
+                            </Text>
+                            <Avatar src={testimonial.avatarUrl} alt={testimonial.name} mb={4} />
+                            <Text fontSize="lg" fontWeight="bold" mb={1}>
+                                {testimonial.name}
+                            </Text>
+                            <Text fontSize="sm" fontStyle="italic" mb={4}>
+                                {testimonial.role}
+                            </Text>
+                        </Flex>
+                    ))}
+                </SimpleGrid>
             </Box>
-
             <Footer />
-
-
 
         </>
     )

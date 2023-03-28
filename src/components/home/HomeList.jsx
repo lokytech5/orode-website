@@ -45,6 +45,10 @@ export default function HomeList({ images = [] }) {
                             borderWidth="1px"
                             borderColor="gray.200"
                             cursor="pointer"
+                            transition="all 0.3s ease"
+                            _hover={{
+                                boxShadow: "2xl",
+                            }}
                         >
                             <Image
                                 src={image.src}
@@ -54,11 +58,24 @@ export default function HomeList({ images = [] }) {
                                 height="200px"
                                 transition="transform 0.3s"
                                 _hover={{
-                                    animation: `${scaleUp} 0.3s forwards`,
+                                    transform: "scale(1.1)",
                                 }}
                             />
-                            <Box p={3}>
-                                <Heading as="h3" size="md" isTruncated textAlign='center'>
+                            <Box
+                                p={3}
+                                pos="absolute"
+                                bottom={0}
+                                left={0}
+                                right={0}
+                                bgColor="rgba(0, 0, 0, 0.5)"
+                                opacity={0}
+                                color="white"
+                                transition="opacity 0.3s"
+                                _hover={{
+                                    opacity: 1,
+                                }}
+                            >
+                                <Heading as="h3" size="md" isTruncated textAlign="center">
                                     {image.title}
                                 </Heading>
                             </Box>

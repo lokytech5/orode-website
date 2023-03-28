@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import Footer from '../../shared/footer/Footer';
 import {
   Text,
   Button,
@@ -95,89 +96,95 @@ export default function DashBoard(props) {
 
   return (
     <>
-      {isAuthenticated ? (
-        isMobile ? (<Box>{renderCards()}</Box>) : (
-          <Box overflowX="auto">
-            <Table variant="simple" size={fontSize}>
-              <TableCaption placement="top">Dashboard Data</TableCaption>
-              <Thead>
-                <Tr>
-                  <Th>Name</Th>
-                  <Th>Email</Th>
-                  <Th>Phone</Th>
-                  <Th>Service Type</Th>
-                  <Th>Date</Th>
-                  <Th>Time</Th>
-                  <Th>Address</Th>
-                  <Th>Message</Th>
-                  <Th>Status</Th>
-                  <Th>Action</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {props.dashBoardData.map((dataItem) => (
-                  <Tr key={dataItem._id}>
-                    <Td>{dataItem.name}</Td>
-                    <Td>{dataItem.email}</Td>
-                    <Td>{dataItem.phoneNumber}</Td>
-                    <Td>{dataItem.serviceType}</Td>
-                    <Td>{dataItem.date}</Td>
-                    <Td>{dataItem.time}</Td>
-                    <Td>{dataItem.address}</Td>
-                    <Td>{dataItem.message}</Td>
-                    <Td>{dataItem.status}</Td>
-                    <Td>
-                      <Button
-                        size={fontSize}
-                        p={padding}
-                        colorScheme="blue"
-                        onClick={() => handleClickEvent(dataItem)}
-                      >
-                        Delete
-                      </Button>
-                    </Td>
+      <Box minH="100vh" display="flex" flexDirection="column">
+        {isAuthenticated ? (
+          isMobile ? (<Box>{renderCards()}</Box>) : (
+            <Box overflowX="auto">
+              <Table variant="simple" size={fontSize}>
+                <TableCaption placement="top">Dashboard Data</TableCaption>
+                <Thead>
+                  <Tr>
+                    <Th>Name</Th>
+                    <Th>Email</Th>
+                    <Th>Phone</Th>
+                    <Th>Service Type</Th>
+                    <Th>Date</Th>
+                    <Th>Time</Th>
+                    <Th>Address</Th>
+                    <Th>Message</Th>
+                    <Th>Status</Th>
+                    <Th>Action</Th>
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </Box>
-        )
-      ) : (
-        <Flex
-          alignItems="center"
-          justifyContent="center"
-          minHeight="50vh"
-          flexDirection="column"
-        >
-          <VStack spacing={4} alignItems="center">
-            <Text fontSize="2xl" fontWeight="bold">
-              Access Restricted
-            </Text>
-            <Text fontSize="lg">
-              Please log in to view the requested content.
-            </Text>
-            <Button colorScheme="blue" size="lg">
-              <Link to="/login">Log In</Link>
-            </Button>
-          </VStack>
-        </Flex>
-      )}
+                </Thead>
+                <Tbody>
+                  {props.dashBoardData.map((dataItem) => (
+                    <Tr key={dataItem._id}>
+                      <Td>{dataItem.name}</Td>
+                      <Td>{dataItem.email}</Td>
+                      <Td>{dataItem.phoneNumber}</Td>
+                      <Td>{dataItem.serviceType}</Td>
+                      <Td>{dataItem.date}</Td>
+                      <Td>{dataItem.time}</Td>
+                      <Td>{dataItem.address}</Td>
+                      <Td>{dataItem.message}</Td>
+                      <Td>{dataItem.status}</Td>
+                      <Td>
+                        <Button
+                          size={fontSize}
+                          p={padding}
+                          colorScheme="blue"
+                          onClick={() => handleClickEvent(dataItem)}
+                        >
+                          Delete
+                        </Button>
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </Box>
+          )
+        ) : (
+          <Flex
+            alignItems="center"
+            justifyContent="center"
+            minHeight="50vh"
+            flexDirection="column"
+          >
+            <VStack spacing={4} alignItems="center">
+              <Text fontSize="2xl" fontWeight="bold">
+                Access Restricted
+              </Text>
+              <Text fontSize="lg">
+                Please log in to view the requested content.
+              </Text>
+              <Button colorScheme="blue" size="lg">
+                <Link to="/login">Log In</Link>
+              </Button>
+            </VStack>
+          </Flex>
+        )}
 
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Restricted Access</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>Only admin has the right to perform this action.</Text>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" onClick={closeModal}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Restricted Access</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text>Only admin has the right to perform this action.</Text>
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="blue" onClick={closeModal}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
+
+
+      </Box>
+      <Footer />
     </>
   )
 }

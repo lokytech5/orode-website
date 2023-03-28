@@ -19,8 +19,6 @@ export default function LoginUserPage() {
                 const token = response.data.token;
                 localStorage.setItem('token', token);
                 // Show success toast
-
-                // console.log("Updated formData:", { ...loginData, username });
                 toast({
                     title: 'Success!',
                     description: `Logged in successfully as ${response.data.username}`,
