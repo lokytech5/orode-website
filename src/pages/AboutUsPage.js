@@ -1,7 +1,8 @@
 import React from 'react'
+import AboutUs from '../components/about/AboutUs'
 
 export default function AboutUsPage() {
   return (
-    <h1>AboutUs</h1>
+    <AboutUs />
   )
 }

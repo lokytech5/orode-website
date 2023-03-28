@@ -50,7 +50,7 @@ export default function LoginInUser(props) {
                 if (user) {
                     dispatch(setAuthenticated(true));
                     dispatch(setUserRole(user.isAdmin ? 'admin' : 'user'));
-                    navigate('/services');
+                    navigate('/');
                 }
             })
             .catch((error) => {

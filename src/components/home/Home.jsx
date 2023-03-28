@@ -33,6 +33,7 @@ export default function Home() {
 
     const bg = useColorModeValue(theme.colors.background.light, theme.colors.background.dark);
     const color = useColorModeValue(theme.colors.text.light.dark, theme.colors.text.dark.dark);
+    const textColor = useColorModeValue('text.light.medium', 'text.dark.medium');
 
     const primaryColor = theme.colors.primary[500];
     const accentColor = theme.colors.accent[500];
@@ -103,7 +104,7 @@ export default function Home() {
                             initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
                             animate={{ opacity: 1, scale: 1, rotate: 0, transition: { duration: 1.5, ease: "easeInOut" } }}
                             color="transparent"
-                            background={textGradient}
+                            background={textColor}
                             backgroundClip="text"
                         >
                             Welcome to MontionPic
