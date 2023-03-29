@@ -57,7 +57,7 @@ export default function Footer() {
             </Grid>
             <Flex direction={{ base: 'column', md: 'row' }} align="center" justify="center" maxW="6xl" mx="auto" px={{ base: 4, md: 8 }} mt={8}>
                 <Text fontSize="sm" mb={{ base: 4, md: 0 }}>
-                    © 2023 Photography Company Name. All Rights Reserved.
+                    © 2023 AfricanaChild Photography. All Rights Reserved.
                 </Text>
                 <Spacer />
                 <Text fontSize="sm" mb={{ base: 4, md: 0 }} color={accentColor}>

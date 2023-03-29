@@ -22,11 +22,16 @@ import {
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
+    useTheme,
     VStack,
 } from '@chakra-ui/react';
 
 export default function Navigation() {
+    const theme = useTheme();
     const [isOpen, setIsOpen] = useState(false);
+
+    const primaryColor = theme.colors.primary[500];
+    const accentColor = theme.colors.accent[500];
 
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -53,7 +58,7 @@ export default function Navigation() {
             justify="space-between"
             wrap="wrap"
             padding="0.5rem"
-            bg="teal.500"
+            bg={accentColor}
             color="white"
         >
             <Flex align="center" mr={5}>
@@ -77,7 +82,7 @@ export default function Navigation() {
                         Gallery
                     </Link>
                     <Link as={NavLink} to="/services" px={2}>
-                        Services
+                        Booking
                     </Link>
                     <Link as={NavLink} to="/about-us" px={2}>
                         About Us

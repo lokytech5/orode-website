@@ -50,18 +50,11 @@ export default function Home() {
 
             <Box
                 pos="relative"
-                bgImage={`
-                      linear-gradient(
-                       to bottom,
-                       rgba(0, 0, 0, 0.7) 0%,
-                       rgba(0, 0, 0, 0.7) 100%
-                    ),
-                   url(${require('../../assets/img/screen.webp')})
-                `}
                 bgSize="cover"
                 bgPosition="center"
                 bgRepeat="no-repeat"
-                height="100%"
+                height="110%"
+                bgImage={require('../../assets/img/photo2.webp')}
                 width="100%"
                 zIndex="1"
             >
@@ -74,23 +67,14 @@ export default function Home() {
                     justifyContent='center'
                     position="relative"
                 >
-                    <Image
-                        src={require('../../assets/img/screen.webp')}
-                        alt="Placeholder for image"
-                        boxSize={imageSize}
-                        width="100%"
-                        height="100%"
-                        objectFit="cover"
-                        position="absolute"
-                        zIndex="-1"
-                    />
+
                     <Box
                         position="absolute"
                         top={0}
                         left={0}
                         right={0}
                         bottom={0}
-                        bgColor="rgba(0, 0, 0, 0.2)"
+
                     />
                     <Box mr={{ base: 0, md: "36" }} textAlign={{ base: 'center', md: 'left' }}>
                         <MotionHeading
@@ -103,11 +87,10 @@ export default function Home() {
                             pt="16"
                             initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
                             animate={{ opacity: 1, scale: 1, rotate: 0, transition: { duration: 1.5, ease: "easeInOut" } }}
-                            color="transparent"
-                            background={textColor}
-                            backgroundClip="text"
+                            color="white"
+
                         >
-                            Welcome to MontionPic
+                            Welcome to AfricanaChild
                         </MotionHeading>
                         <MotionText
                             mb={10}
@@ -118,7 +101,7 @@ export default function Home() {
                             animate={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.5 } }}
                             color={accentColor}
                         >
-                            where creativity meets inspiration and discover the art of photography
+                            where creativity meets inspiration with Professional Photography
                         </MotionText>
 
 
